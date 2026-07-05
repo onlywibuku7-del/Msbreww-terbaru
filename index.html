@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>System Scan</title>
+
+<style>
+body{
+    margin:0;
+    background:#000;
+    color:#00ff00;
+    font-family:Consolas, monospace;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+
+.box{
+    width:90%;
+    max-width:500px;
+    text-align:center;
+}
+
+h2{
+    margin-bottom:20px;
+}
+
+.progress{
+    width:100%;
+    height:30px;
+    border:2px solid #00ff00;
+    border-radius:8px;
+    overflow:hidden;
+}
+
+.bar{
+    width:0%;
+    height:100%;
+    background:#00ff00;
+    transition:width .15s;
+}
+
+#status{
+    margin-top:15px;
+    font-size:18px;
+}
+</style>
+</head>
+<body>
+
+<div class="box">
+    <h2>🔍 Memindai Sistem...</h2>
+
+    <div class="progress">
+        <div class="bar" id="bar"></div>
+    </div>
+
+    <div id="status">0%</div>
+</div>
+
+<script>
+let persen = 0;
+
+let scan = setInterval(() => {
+
+    persen++;
+
+    document.getElementById("bar").style.width = persen + "%";
+    document.getElementById("status").innerHTML = persen + "%";
+
+    if(persen == 30){
+        document.getElementById("status").innerHTML = "30% - Memeriksa file...";
+    }
+
+    if(persen == 60){
+        document.getElementById("status").innerHTML = "60% - Ancaman terdeteksi...";
+    }
+
+    if(persen == 90){
+        document.getElementById("status").innerHTML = "90% - Menghapus virus...";
+    }
+
+    if(persen >= 100){
+        clearInterval(scan);
+
+        setTimeout(()=>{
+            document.body.innerHTML = `
+            <div style="text-align:center;color:red;font-family:Arial;">
+                <h1>⚠️ VIRUS TERDETEKSI! ⚠️</h1>
+                <h2>😂 Kena prank!</h2>
+                <p>Tenang, HP kamu aman. Ini cuma animasi.</p>
+            </div>`;
+        },500);
+    }
+
+},70);
+</script>
+
+
+  
+</body>
+</html>
